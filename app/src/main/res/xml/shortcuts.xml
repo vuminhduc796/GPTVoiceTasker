@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is a sample shortcuts.xml -->
+<shortcuts
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <capability
+        android:name="custom.actions.intent.OPEN_FEATURE_INTENT"
+        app:queryPatterns="@array/ExampleQueries">
+        <intent android:action="android.intent.action.VIEW" targetPackage="com.research.activityinvoker" targetClass="com.research.activityinvoker.ViewActivity.ReadManifest">
+            <parameter
+                android:name="component_name"
+                android:key="component_name"
+                android:mimeType="https://schema.org/Text" />
+            <parameter
+                android:name="app_name"
+                android:key="app_name"
+                android:mimeType="https://schema.org/Text" />
+        </intent>
+    </capability>
+    <shortcut android:shortcutId="openAppShortcut"
+        android:shortcutShortLabel="@string/label"
+        >
+        <capability-binding android:key="custom.actions.intent.OPEN_FEATURE_INTENT">
+            <parameter-binding android:key="app_name" />
+            <parameter-binding android:key="component_name" />
+        </capability-binding>
+    </shortcut>
+
+</shortcuts>

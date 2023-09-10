@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ExampleQueries">
+        <item>open $component_name in $app_name with activity invoker</item>
+        <item>show me $component_name in $app_name</item>
+        <item>find the $component_name in $app_name</item>
+        <item>start $component_name in $app_name</item>
+        <item>open $component_name in $app_name app</item>
+        <item>show me $component_name in $app_name app</item>
+        <item>find the $component_name in $app_name app</item>
+        <item>start $component_name in $app_name app</item>
+        <item>open the $component_name in $app_name</item>
+        <item>show me the $component_name in $app_name</item>
+        <item>start the $component_name in $app_name</item>
+        <item>open the $component_name in $app_name app</item>
+        <item>show me the $component_name in $app_name app</item>
+        <item>start the $component_name in $app_name app</item>
+        <item>open $component_name page in $app_name</item>
+        <item>show me $component_name page in $app_name</item>
+        <item>find the $component_name page in $app_name</item>
+        <item>start $component_name page in $app_name</item>
+        <item>open $component_name page in $app_name app</item>
+        <item>show me $component_name page in $app_name app</item>
+        <item>find the $component_name page in $app_name app</item>
+        <item>start $component_name page in $app_name app</item>
+        <item>open the $component_name page in $app_name</item>
+        <item>show me the $component_name page in $app_name</item>
+        <item>start the $component_name page in $app_name</item>
+        <item>open the $component_name page in $app_name app</item>
+        <item>show me the $component_name page in $app_name app</item>
+        <item>start the $component_name page in $app_name app</item>
+    </string-array>
+</resources>
