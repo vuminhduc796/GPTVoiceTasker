@@ -1,0 +1,112 @@
+# Detecting action
+
+"Parse the following user command to interact with the smartphone. The prompt provides APP: the currently used app. CURRENT_ACTIVITY_NAME: current that user is on COMMAND: what user want to do in the app, XML: Current Android UI element on the screen as XML code. PACKAGE: package name of Android app. First, output a single word for the ACTION that the user wants to perform from this list: PRESS, ENTER, SCROLL and the target. Rules:
+[Rule Description]
+[Examples using itemQuestion and itemAnswerActionDecision with substituted parameters]
+Q: APP: $appName. CURRENT_ACTIVITY_NAME: $currentActName. COMMAND: $currentCommand. XML: $currentScreenXML. PACKAGE: $packageName.\n"
+
+
+# Detecting target for entering text
+
+"Given a voice command to smartphone to type a piece of text.
+The prompt provides APP: the currently used app. Identify the TEXT that user want to type into the text box.
+Q: Type in KFC for me. A: KFC
+Q: Put hello sir into the text box. A: hello sir
+Q: Fill in the text postal address. A: postal address
+Q: Enter this is a good day. A: this is a good day
+Q: Write currently working on it to the search bar. A: currently working on it
+Q: Put the word hello into the text box. A: hello
+Q: $currentCommand. A:"
+
+# Detecting target for tapping
+
+"Identify the TARGET element that user want to press.
+The prompt provides APP: the currently used app. CURRENT_ACTIVITY_NAME: current that user is on
+COMMAND: what user want to do in the app, XML: Current Android UI element on the screen as XML code.
+PACKAGE: package name of Android app. The TARGET must be a, which has clickable=\"true\", or a number from 1 to $currentTooltipCount
+
+[Examples using itemQuestionPress and itemAnswer with substituted parameters]
+
+Q: APP: $appName. CURRENT_ACTIVITY_NAME: $currentActName. COMMAND: $currentCommand. XML: $currentScreenXML. PACKAGE: $packageName. TOOLTIP_COUNT: $currentTooltipCount.\nA:"
+
+
+# Detecting target for scrolling
+
+"Input a voice command to smartphone to scroll.
+The prompt provides APP: the currently used app. CURRENT_ACTIVITY_NAME: current that user is on
+COMMAND: what user want to do in the app, XML: Current Android UI element on the screen as XML code.
+PACKAGE: package name of Android app. Output a single word LEFT, RIGHT, UP, DOWN for TARGET.
+Remember that swipe direction is opposite to scroll direction.
+
+[Examples using itemQuestion and itemAnswer with substituted parameters]
+
+Q: APP: $appName. CURRENT_ACTIVITY_NAME: $currentActName. COMMAND: $currentCommand. XML: . PACKAGE: .\nA:"
+
+# Open app page via deeplink
+
+"In $appName app, given an app feature, choose the best match from the following activities and links: $deeplinks.
+Keep in mind the keyword often appears in the item. \n$currentCommand"
+
+# Open app
+
+"User says that he wants to $currentCommand.
+Which APP NAME in this list is user referring to: $appNames.
+Return one of the item from the list, by itself nothing else."
+
+
+# Generate Screen description
+
+"Input current screen information, including APP: the currently used app,
+CURRENT_ACTIVITY_NAME: current that user is on, XML: Current Android UI element on the screen as XML code,
+PACKAGE: package name of Android app. Utilise the textual information, buttons given, output the summarisation (description) for this screen.
+
+All the textual data and buttons must be included.
+
+Q: APP: AusPost. CURRENT_ACTIVITY_NAME: .feature.track.TrackActivity. XML: [XML1]. PACKAGE: au.com.auspost.android
+A: This is the screen for tracking orders in AusPost app, include a button to add new track item. In addition, user can log in and sign up from this screen. Contains the following buttons : [ADD, Log in, Sign up for free].
+It has the following textual data: [Track, Don’t miss a delivery – get your parcels where y, Track, Find us, Account, More]...
+
+[Other examples]
+
+Q: APP: $appName. CURRENT_ACTIVITY_NAME: $currentActName. XML: $currentScreenXML. PACKAGE: $packageName.
+A: "
+
+
+# Find most relevant command
+
+"Given a command (COMMAND) that the user wants to perform on an Android app (APP) and the following list of saved commands (SAVED_COMMANDS).
+Choose the command from the SAVED_COMMANDS list that will match this request the best in terms of pattern and the word that will be substituted by the Named Entity Extraction approach.
+
+If none of the commands in the list matches the user intent, return “No match”.
+
+Q: COMMAND:I want to see some cartoon, SAVED_COMMANDS:
+1. I want to search for classical music
+2. ...
+A: Let’s think step by step, because in the command "I want to search for classical music” the user’s purpose is to search and see the classical music...
+
+[Other examples]
+
+Q: COMMAND:$command, SAVED_COMMANDS:\n[arrayListToString($savedCommands)]\nA: "
+
+
+# Matching screen description
+
+"Input contains COMMAND: user request for an action that user want to do in the mobile app,
+SCREENS: List of descriptions for each screen that the app has.
+Output the best match from the list of description in SCREENS. If you are unsure about the answer, respond \"no match\".
+
+Q: COMMAND:I want to see previously watched videos, SCREENS:\n1. This is the screen for seeing history videos in Youtube...
+A:This is the screen for seeing history videos in Youtube, include a button to delete items, view all history. In addition, user can see any video from this screen.
+
+[Other examples]
+
+Q: COMMAND:$command, SCREENS:\n[arrayListToString($screenDescriptions)]
+A:"
+
+# Supporting methods
+
+- itemQuestion: "Q: APP: $appName. CURRENT_ACTIVITY_NAME: $actName. COMMAND: $command. XML: $currentScreenXML. PACKAGE: $packageName.\n"
+- itemAnswerActionDecision: "A: $chainOfThought.\nResult: ###$action###$target"
+- itemQuestionPress: "Q: APP: $appName. CURRENT_ACTIVITY_NAME: $actName. COMMAND: $command. XML: $currentScreenXML. PACKAGE: $packageName TOOLTIP_COUNT: $numOfToolTips.\n"
+- itemAnswer: "A: $action $chainOfThought.\n###Action:$action ###Target Node:$targetNode ###Bounds:$bounds"
+
